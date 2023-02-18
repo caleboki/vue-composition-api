@@ -1,27 +1,26 @@
 <template>
-  <div>
-    <p>Count: {{ count }}</p>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
+  <div class="app">
+    <h1>My App</h1>
+    <counter :max="5"/>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import Counter from './components/Counter.vue';
 
 export default {
-  setup() {
-    const count = ref(0)
-
-    const increment = () => {
-      count.value++
-    }
-
-    const decrement = () => {
-      count.value--
-    }
-
-    return { count, increment, decrement }
-  }
-}
+  components: {
+    Counter,
+  },
+};
 </script>
+
+<style>
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+</style>

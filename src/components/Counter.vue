@@ -1,27 +1,50 @@
 <template>
   <div>
-    <p>Count: {{ count }}</p>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
+    <button @click="decrement" :disabled="count <= min">-</button>
+    <span>{{ count }}</span>
+    <button @click="increment" :disabled="count >= max">+</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 export default {
-  setup() {
-    const count = ref(0)
+  name: 'Counter',
+  props: {
+    initialCount: {
+      type: Number,
+      default: 0,
+    },
+    min: {
+      type: Number,
+      default: 0,
+    },
+    max: {
+      type: Number,
+      default: Infinity,
+    },
+  },
+  setup(props) {
+    const count = ref(props.initialCount);
 
-    const increment = () => {
-      count.value++
+    function increment() {
+      if (count.value < props.max) {
+        count.value++;
+      }
     }
 
-    const decrement = () => {
-      count.value--
+    function decrement() {
+      if (count.value > props.min) {
+        count.value--;
+      }
     }
 
-    return { count, increment, decrement }
-  }
-}
+    return {
+      count,
+      increment,
+      decrement,
+    };
+  },
+};
 </script>
