@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <h1>My App</h1>
-    <counter :max="5"/>
+    <counter/>
   </div>
 </template>
 
